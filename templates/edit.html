@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Edit Student</h1>
+            <p>Update the student's registration details</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>Student Details</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <div class="form-grid">
+                    <div>
+                        <label for="name">Full Name</label>
+                        <input id="name" name="name" type="text"
+                               value="{{ student.name }}" required>
+                    </div>
+
+                    <div>
+                        <label for="email">Email Address</label>
+                        <input id="email" name="email" type="email"
+                               value="{{ student.email }}" required>
+                    </div>
+
+                    <div>
+                        <label for="course">Course</label>
+                        <input id="course" name="course" type="text"
+                               value="{{ student.course }}" required>
+                    </div>
+                </div>
+
+                <button type="submit">Save Changes</button>
+                <a class="reset-link" href="{{ url_for('index') }}">Cancel</a>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
